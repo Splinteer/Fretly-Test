@@ -171,7 +171,6 @@ describe('UserController', function() {
         .end((err, res) => {
           expect(res, 'Impossible get count').to.have.status(200)
           expect(res.body.message.toLowerCase(), 'Shoud not have a s').to.not.includes('incrits')
-          console.log('TEST' + res.body.message)
           done()
         })
     })
@@ -192,7 +191,6 @@ describe('UserController', function() {
             .auth(aTempUser[0].email, aTempUser[0].password)
             .end((err, res) => {
               expect(res, 'Impossible get count').to.have.status(200)
-              console.log('TEST' + res.body.message)
               expect(res.body.message.toLowerCase(), 'Shoud have a s').to.includes('inscrits')
               done()
             })
