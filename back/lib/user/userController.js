@@ -32,10 +32,12 @@ module.exports = {
           message
         })
       } else {
-        delete user.password
+        req.session.authenticated = true
+        req.session.userId = user.id
+
         res.status(200).json({
           code: 200,
-          user
+          userId: user.id
         })
       }
     })
@@ -44,17 +46,17 @@ module.exports = {
   login: function(req, res) {
     User.findOne({ email: req.body.email, password: req.body.password }, 'id', function (err, user) {
       if (err) {
-        res.sendStatus(500)
+        res.status(500).send('Unknow error')
       } else if (user) {
         req.session.authenticated = true
         req.session.userId = user.id
 
         res.status(200).json({
           code: 200,
-          id: user.id
+          userId: user.id
         })
       } else {
-        res.sendStatus(401)
+        res.status(401).send('Wrong combination')
       }
     });
   },

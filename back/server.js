@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
+const cors = require('cors')
 const port = 8080
 const config = require('./config')
 const userRoute = require('./lib/user/userRoute')
@@ -23,6 +24,13 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+
+const corsOptions = {
+  origin: 'http://localhost:4200',
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  credentials: true
+}
+app.use(cors(corsOptions))
 
 userRoute(app)
 
