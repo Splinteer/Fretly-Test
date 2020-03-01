@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="centered">
+    <img class="logo" src="assets/img/logo.png">
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+    <div class="form-field">
+      <input type="email" formControlName="email" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">L'adresse email est obligatoire</div>
+        <div *ngIf="f.email.errors.email">L'adresse email est invalide</div>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <input type="password" formControlName="password" placeholder="Saisir un mot de passe"  [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Le mot de passe est obligatoire</div>
+      </div>
+    </div>
+
+    <p>Tous les champs sont obligatoires</p>
+
+    <div class="form-field centered">
+      <input type="submit" name="submit" value="Se connecter">
+      <div *ngIf="submitted && f.submit.errors" class="invalid-feedback">
+        <div *ngIf="f.submit.errors.error">Impossible de se connecter pour le moment</div>
+        <div *ngIf="f.submit.errors.wrong">Combinaison email/mot de passe invalide</div>
+      </div>
+    </div>
+
+    <p class="centered"><span class="bold">Pas encore de compte?</span>&nbsp;<a href="/register">Inscrivez-vous</a></p>
+
+  </form>
+</div>

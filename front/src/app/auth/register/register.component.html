@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="centered">
+    <img class="logo" src="assets/img/logo.png">
+  </div>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm)">
+    <div class="form-field">
+      <label class="leftLabel" for="transporteur" [ngClass]="{ 'is-invalid': submitted && f.type.errors }">Profil de l'entreprise</label>
+      <div class="centered radioContainer">
+        <input type="radio" formControlName="type" id="transporteur" value="transporteur"><label for="transporteur">transporteur</label>
+        <input type="radio" formControlName="type" id="chargeur" value="chargeur"><label for="chargeur">chargeur</label>
+      </div>
+      <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+        <div *ngIf="f.type.errors.required">Veuillez choisir un profil d'entreprise</div>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <input type="email" formControlName="email" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">L'adresse email est obligatoire</div>
+        <div *ngIf="f.email.errors.email">L'adresse email est invalide</div>
+        <div *ngIf="f.email.errors.used">L'adresse email est déjà enregisté</div>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <input type="password" formControlName="password" placeholder="Saisir un mot de passe"  [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Le mot de passe est obligatoire</div>
+      </div>
+    </div>
+
+    <p>Tous les champs sont obligatoires</p>
+    <p>L'inscription à Fretly entraîne l'acceptation des <a href="">Conditions Générales d'Utilisation</a> de la plateforme</p>
+
+    <div class="form-field centered">
+      <input type="submit" name="submit" value="S'inscrire">
+      <div *ngIf="submitted && f.submit.errors" class="invalid-feedback">
+        <div *ngIf="f.submit.errors.error">Impossible de s'enregistrer pour le moment</div>
+      </div>
+    </div>
+
+    <p class="centered"><span class="bold">Vous avez déjà un compte?</span>&nbsp;<a href="/login">Connectez-vous</a></p>
+
+  </form>
+</div>
